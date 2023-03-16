@@ -1,0 +1,29 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define "vm1" do |vm1|
+    vm1.vm.box = "centos/7"
+    vm1.vm.hostname = "vm1"
+    vm1.vm.network "private_network", ip: "192.168.56.11"
+  end
+
+  config.vm.define "vm2" do |vm2|
+    vm2.vm.box = "centos/7"
+    vm2.vm.hostname = "vm2"
+    vm2.vm.network "private_network", ip: "192.168.56.12"
+  end
+
+  config.vm.define "vm3" do |vm3|
+    vm3.vm.box = "centos/7"
+    vm3.vm.hostname = "vm3"
+    vm3.vm.network "private_network", ip: "192.168.56.13"
+  end
+
+  config.vm.box = "generic/centos7"
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+  end
+end
